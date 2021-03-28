@@ -1,0 +1,36 @@
+version: 2.17
+jobs:
+  lint_test:
+    docker:
+      - image: circleci/node:12.18.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{checksum "yarn.lock"}}
+      - run:
+          name: Install Node dependencies
+          command: yarn
+      - save_cache:
+          key: dependency-cache-{{checksum "yarn.lock"}}
+          paths:
+            - ./node_modules
+      - run:
+          name: Eslint test
+          command: yarn lint:check
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - checkout
+      - run:
+          name: Deploy over SSH
+          command: ssh $USER@$IP "cd /home/express-boilerplate; git pull; yarn; pm2 restart api";
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - lint_test
+      - deploy:
+          requires:
+            - lint_test
