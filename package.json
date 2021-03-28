@@ -1,0 +1,52 @@
+{
+  "name": "express-es6-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/index",
+    "build": "./node_modules/.bin/babel  src --out-dir dist --copy-files",
+    "start": "node dist/index.js",
+    "watch:lint": "node node_modules/eslint-watch/bin/esw --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecodeorigin/express-es6-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thecodeorigin/express-es6-boilerplate/issues"
+  },
+  "homepage": "https://github.com/thecodeorigin/express-es6-boilerplate#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "mongoose": "^5.12.2",
+    "morgan": "^1.10.0",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.13",
+    "@babel/node": "^7.13.13",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.12",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "faker": "^5.5.1",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.2.1"
+  }
+}
