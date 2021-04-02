@@ -7,7 +7,7 @@ import '../../config/env';
 /**
  *  @description This is a middleware used for authenticating validation. Inject this in your routing configuration
  */
-const authentication = async (req, res, next) => {
+export default async function authentication(req, res, next) {
   try {
     const { token } = req.headers;
     if (!token) {
@@ -29,8 +29,4 @@ const authentication = async (req, res, next) => {
     }
     next(error);
   }
-};
-
-export default {
-  authentication,
-};
+}

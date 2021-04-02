@@ -1,5 +1,5 @@
 import ValidationHelper from '../../../common/filters/validation';
-import auth from '../../../common/guards/authentication';
+import authentication from '../../../common/guards/authentication';
 import { routerGroup } from '../../../common/helpers/routerGroup';
 import UserController from './index.controller';
 
@@ -12,18 +12,18 @@ module.exports = routerGroup(
     {
       method: 'get',
       path: '/',
-      handlers: [auth.authentication, UserController.getController().getAll],
+      handlers: [authentication, UserController.getController().getAll],
     },
     {
       method: 'get',
       path: '/:id',
-      handlers: [auth.authentication, UserController.getController().getOne],
+      handlers: [authentication, UserController.getController().getOne],
     },
     {
       method: 'post',
       path: '/',
       handlers: [
-        auth.authentication,
+        authentication,
         ValidationHelper.isNotEmpty('email'),
         ValidationHelper.isEmail('email'),
         ValidationHelper.isNotEmpty('name'),
@@ -35,7 +35,7 @@ module.exports = routerGroup(
       method: 'patch',
       path: '/:id',
       handlers: [
-        auth.authentication,
+        authentication,
         ValidationHelper.isNotEmpty('email', true),
         ValidationHelper.isEmail('email', true),
         ValidationHelper.isNotEmpty('name', true),
@@ -46,7 +46,7 @@ module.exports = routerGroup(
     {
       method: 'delete',
       path: '/:id',
-      handlers: [auth.authentication, UserController.getController().deleteOne],
+      handlers: [authentication, UserController.getController().deleteOne],
     },
   ]
 );
