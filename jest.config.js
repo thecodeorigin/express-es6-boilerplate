@@ -15,7 +15,7 @@ module.exports = {
   coveragePathIgnorePatterns: [
     'node_modules',
     'src/config',
-    'src/app.js',
+    'src/server.js',
     'tests',
   ],
   coverageReporters: ['lcov', 'clover', 'html'],

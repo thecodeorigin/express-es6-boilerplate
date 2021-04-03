@@ -1,5 +1,5 @@
 import request from 'supertest';
-import server from '../src/app';
+import server from '../src/server';
 import knex from '../src/config/connection';
 
 describe('/users endpoint', () => {

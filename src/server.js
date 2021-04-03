@@ -7,6 +7,7 @@ import logger from './utils/Winston';
 import router from './api/router';
 import handleError from './common/helpers/errorHandler';
 import './config/env';
+import banner from './bootstrap/banner';
 // ExpressJS application
 const app = express();
 // ExpressJS middleware
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Router configuration
 router.forEach((route) => {
   if (app.get('env') !== 'test') {
-    logger.debug(
+    logger.info(
       `${chalk.green('✓')} ${chalk.bold.blue(
         route.method.toUpperCase()
       )}: ${chalk.blue(route.path)} configured and setup.`
@@ -46,16 +47,9 @@ app.use((err, req, res, _next) => {
 });
 
 // Initialize ExpressJS app
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.APP_PORT || 3000);
 const server = app.listen(app.get('port'), () => {
-  if (app.get('env') !== 'test') {
-    console.log(
-      `${chalk.green('✓')} App is running at http://localhost:${app.get(
-        'port'
-      )} in ${chalk.yellow(app.get('env'))} mode`
-    );
-    console.log('Press CTRL-C to stop\n');
-  }
+  banner();
 });
 
 // Export app instance
