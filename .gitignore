@@ -121,3 +121,6 @@ dist
 
 .idea/
 demo.js
+.DS_Store
+dists/
+logs/

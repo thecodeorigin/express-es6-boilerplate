@@ -1,4 +1,5 @@
 import _ from "lodash";
+
 /**
  * @typedef {{name: string, prefix: string}} RouterGroupOption
  * @typedef {{method: string, path: string, handler: function}} Route
@@ -16,6 +17,7 @@ export const routerGroup = (groupOptions, routes) =>
       .join("/")}`;
     const validator = route.validator || null;
     const middlewares = route.middlewares || [];
+    validateRouteConfig(route)
     if (!route.controller) {
       throw Error(
         `No controller for route ${route.method.toLowerCase()} in path ${path}`
@@ -27,3 +29,15 @@ export const routerGroup = (groupOptions, routes) =>
       handlers: _.compact([validator, ...middlewares, route.controller]),
     };
   });
+
+
+const validateRouteConfig = (routeConfig) => {
+  if (!routeConfig.path || !routeConfig.method) {
+    throw new Error(`No path or method configured`)
+  }
+  if (!routeConfig.controller) {
+    throw new Error(
+      `No controller for route ${route.method.toLowerCase()} in path ${route.path}`
+    );
+  }
+}
