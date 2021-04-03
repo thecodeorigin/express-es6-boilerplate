@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
-import { HTTPException } from '../../common/helpers/errorHandler';
 import httpMessage from '../../constants/httpMessage';
+import HTTPException from '../../utils/HTTPException';
 
 export default class Service {
   getMany() {

@@ -1,20 +1,8 @@
 const { UNEXPECTED_EXCEPTION } = require('../../constants/httpMessage');
-
-class HTTPException extends Error {
-  /**
-   * @param {*} statusCode : The error status code
-   * @param {*} message : The error message
-   */
-  constructor(statusCode, message) {
-    super();
-    this.statusCode = statusCode;
-    this.message = message;
-  }
-}
 /**
  * @description This helper function is used to handle Exception inside ExpressJS application
  */
-const handleError = (err, res) => {
+export default function handleError(err, res) {
   // HTTP Exception
   if (err.statusCode && err.message) {
     return res.status(err.statusCode).json({
@@ -30,9 +18,4 @@ const handleError = (err, res) => {
     statusCode: 500,
     message: UNEXPECTED_EXCEPTION,
   });
-};
-
-module.exports = {
-  HTTPException,
-  handleError,
-};
+}

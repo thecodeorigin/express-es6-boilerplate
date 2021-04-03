@@ -1,10 +1,10 @@
 import '../../../config/env';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { HTTPException } from '../../../common/helpers/errorHandler';
 import httpMessage from '../../../constants/httpMessage';
 import Service from '../../core/Service';
 import UserRepository from '../User/index.repository';
+import HTTPException from '../../../utils/HTTPException';
 
 export default class AuthService extends Service {
   constructor() {

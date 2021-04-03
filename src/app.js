@@ -42,8 +42,7 @@ app.use((req, res) =>
 
 // Error handler
 app.use((err, req, res, _next) => {
-  console.log(err);
-  handleError(err, res);
+  return handleError(err, res);
 });
 
 // Initialize ExpressJS app

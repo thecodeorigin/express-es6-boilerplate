@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import Controller from '../../core/Controller';
 import AuthService from './index.service';
 import httpMessage from '../../../constants/httpMessage';
-import { HTTPException } from '../../../common/helpers/errorHandler';
+import HTTPException from '../../../utils/HTTPException';
 
 export default class AuthController extends Controller {
   constructor() {

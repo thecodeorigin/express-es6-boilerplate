@@ -1,8 +1,8 @@
 import { verify, TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
-import { HTTPException } from '../helpers/errorHandler';
 import knex from '../../config/connection';
 import httpMessage from '../../constants/httpMessage';
 import '../../config/env';
+import HTTPException from '../../utils/HTTPException';
 
 /**
  *  @description This is a middleware used for authenticating validation. Inject this in your routing configuration
@@ -19,14 +19,14 @@ export default async function authentication(req, res, next) {
       throw new HTTPException(401, httpMessage.USER_NOT_FOUND);
     }
     req.user = user;
-    next();
+    return next();
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      next(new HTTPException(401, httpMessage.LOGIN_REQUIRED));
+      return next(new HTTPException(401, httpMessage.LOGIN_REQUIRED));
     }
     if (error instanceof JsonWebTokenError) {
-      next(new HTTPException(401, httpMessage.LOGIN_REQUIRED));
+      return next(new HTTPException(401, httpMessage.LOGIN_REQUIRED));
     }
-    next(error);
+    return next(error);
   }
 }

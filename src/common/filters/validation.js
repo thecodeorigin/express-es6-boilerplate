@@ -1,4 +1,4 @@
-import { HTTPException } from '../helpers/errorHandler';
+import HTTPException from '../../utils/HTTPException';
 
 export default class ValidationHelper {
   static isEmail(field, optional = false) {
