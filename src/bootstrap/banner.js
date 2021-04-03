@@ -5,7 +5,7 @@ import pkj from '../../package.json';
 export default function banner() {
   const route = () =>
     `http://${process.env.APP_HOST || 'localhost'}:${process.env.APP_PORT}`;
-  if (process.env.NODE_ENV !== 'test') {
+  if (['development', 'staging'].includes(process.env.NODE_ENV.trim())) {
     logger.info('');
     logger.info(
       `Your API is ready on ${route()}${process.env.APP_ROUTE_PREFIX}`
@@ -21,7 +21,8 @@ export default function banner() {
     logger.info(`Swagger      : ${route()}${process.env.SWAGGER_ROUTE}`);
     logger.info('-------------------------------------------------------');
     logger.info('');
-  } else {
+  }
+  if (process.env.NODE_ENV === 'production') {
     logger.info(`> Server is running at: ${route()}`);
   }
 }
