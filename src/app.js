@@ -1,18 +1,16 @@
 // ExpressJS dependencies
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const chalk = require('chalk');
-const router = require('./api/router').default;
-const { handleError } = require('./common/helpers/errorHandler');
+import express from 'express';
+import path from 'path';
+import cookieParser from 'cookie-parser';
+import chalk from 'chalk';
+import logger from './utils/Winston';
+import router from './api/router';
+import handleError from './common/helpers/errorHandler';
 // ExpressJS application
 const app = express();
 require('dotenv').config();
 // ExpressJS middleware
-if (app.get('env') !== 'test') {
-  app.use(logger('dev'));
-}
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -20,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Router configuration
 router.forEach((route) => {
   if (app.get('env') !== 'test') {
-    console.log(
+    logger.debug(
       `${chalk.green('✓')} ${chalk.bold.blue(
         route.method.toUpperCase()
       )}: ${chalk.blue(route.path)} configured and setup.`

@@ -3,17 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "export NODE_ENV=production && node ./dist/app.js",
+    "start:linux": "export NODE_ENV=production && node ./dist/app.js",
     "start:window": "set NODE_ENV=production && node ./dist/app.js",
     "build": "rimraf dist && babel ./src --out-dir dist --copy-files",
-    "dev": "set NODE_ENV=development && nodemon ./app.js",
+    "dev": "set NODE_ENV=development && nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
     "migrate:make": "knex migrate:make --knexfile src/config/knexfile.js",
     "migrate:latest": "knex migrate:latest --knexfile src/config/knexfile.js",
     "migrate:rollback": "knex migrate:rollback --knexfile src/config/knexfile.js",
     "seed:make": "knex seed:make --knexfile src/config/knexfile.js",
     "seed:run": "knex seed:run --knexfile src/config/knexfile.js",
     "db:reset": "yarn migrate:rollback && yarn migrate:latest && yarn seed:run",
-    "eslint": "eslint",
     "lint:check": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext .js .",
     "test": "jest --coverage tests"
@@ -29,13 +28,16 @@
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.18",
+    "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.13.10",
     "@babel/core": "^7.13.13",
+    "@babel/node": "^7.13.13",
     "@babel/plugin-proposal-class-properties": "^7.13.0",
     "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.13.12",
