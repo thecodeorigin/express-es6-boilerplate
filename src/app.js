@@ -6,9 +6,9 @@ import chalk from 'chalk';
 import logger from './utils/Winston';
 import router from './api/router';
 import handleError from './common/helpers/errorHandler';
+import './config/env';
 // ExpressJS application
 const app = express();
-require('dotenv').config();
 // ExpressJS middleware
 
 app.use(express.json());
@@ -59,4 +59,4 @@ const server = app.listen(app.get('port'), () => {
 });
 
 // Export app instance
-module.exports = server;
+export default server;

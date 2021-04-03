@@ -1,6 +1,6 @@
-const request = require('supertest');
-const server = require('../app');
-const knex = require('../src/config/connection');
+import request from 'supertest';
+import server from '../src/app';
+import knex from '../src/config/connection';
 
 describe('/users endpoint', () => {
   test('GET /users should return 401 if user is not logged in', async (done) => {
