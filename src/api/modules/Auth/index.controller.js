@@ -18,7 +18,7 @@ export default class AuthController extends Controller {
     return AuthController.instance;
   }
 
-  async login(req, res, next) {
+  login = async (req, res, next) => {
     try {
       const payload = { email: req.body.email, password: req.body.password };
       const data = await this.service.login(payload);
@@ -30,9 +30,9 @@ export default class AuthController extends Controller {
     } catch (error) {
       return next(error);
     }
-  }
+  };
 
-  async register(req, res, next) {
+  register = async (req, res, next) => {
     try {
       const payload = {
         email: req.body.email,
@@ -48,9 +48,9 @@ export default class AuthController extends Controller {
     } catch (error) {
       return next(error);
     }
-  }
+  };
 
-  async getMe(req, res, next) {
+  getMe = async (req, res, next) => {
     try {
       const payload = req.headers.token;
       const data = await this.service.getMe(payload);
@@ -68,5 +68,5 @@ export default class AuthController extends Controller {
       }
       return next(error);
     }
-  }
+  };
 }

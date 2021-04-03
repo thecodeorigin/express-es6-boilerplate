@@ -8,7 +8,19 @@ const date = moment().format('DDMMYYYY-hhmmss');
 const options = {
   file: {
     level: 'info',
-    format: winston.format.simple(),
+    format: winston.format.combine(
+      winston.format.simple(),
+      winston.format.splat(),
+      // Time format
+      winston.format.timestamp({
+        format: 'DD-MM-YYYY HH:mm:ss',
+      }),
+      // Setting log format
+      winston.format.printf((log) => {
+        if (log.stack) return `${log.level}: [${log.timestamp}] ${log.stack}`;
+        return `${log.level}: [${log.timestamp}] ${log.message}`;
+      })
+    ),
     filename: path.join(
       __dirname,
       `../../logs/${currentYear}/${currentMonth}/${date}.log`

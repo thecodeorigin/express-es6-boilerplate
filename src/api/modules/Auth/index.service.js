@@ -25,7 +25,7 @@ export default class AuthService extends Service {
     if (!user) {
       throw new HTTPException(404, httpMessage.USER_NOT_FOUND);
     }
-    const check = await bcrypt.compare(password, user.password);
+    const check = bcrypt.compareSync(password, user.password);
     if (!check) {
       throw new HTTPException(401, httpMessage.INVALID_CREDENTIAL);
     }

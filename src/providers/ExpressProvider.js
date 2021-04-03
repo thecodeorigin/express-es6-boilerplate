@@ -22,7 +22,7 @@ export default class ExpressProvider {
     this.app.use(
       expressWinston.logger({
         winstonInstance: logger,
-        msg: 'HTTP {{req.method}} {{req.url}}',
+        msg: '{{req.method}} {{req.url}} {{res.statusCode}} - {{res.responseTime}}ms',
       })
     );
   }
@@ -55,6 +55,7 @@ export default class ExpressProvider {
     this.app.use(
       expressWinston.errorLogger({
         winstonInstance: logger,
+        msg: '{{req.method}} {{req.url}} - message: {{err.message}}',
       })
     );
     // Error handler

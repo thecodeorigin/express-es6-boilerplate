@@ -1,24 +1,5 @@
 export default class Controller {
-  constructor() {
-    this.bindMethods();
-  }
-
-  bindMethods() {
-    // Get methods
-    const proto = Object.getPrototypeOf(this);
-    const methods = [
-      ...Object.getOwnPropertyNames(Controller.prototype),
-      ...Object.getOwnPropertyNames(proto),
-    ];
-    // Bind methods
-    methods.forEach((method) => {
-      if (typeof this[method] === 'function') {
-        this[method] = this[method].bind(this);
-      }
-    });
-  }
-
-  async getMany(_req, res, next) {
+  getMany = async (_req, res, next) => {
     try {
       const data = await this.service.getMany();
       return res.status(200).json({
@@ -29,9 +10,9 @@ export default class Controller {
     } catch (err) {
       return next(err);
     }
-  }
+  };
 
-  async getOne(req, res, next) {
+  getOne = async (req, res, next) => {
     try {
       const { id } = req.params;
       const data = await this.service.getOne(id);
@@ -43,9 +24,9 @@ export default class Controller {
     } catch (err) {
       return next(err);
     }
-  }
+  };
 
-  async createOne(req, res, next) {
+  createOne = async (req, res, next) => {
     try {
       const data = await this.service.createOne(req.body);
       return res.status(201).json({
@@ -56,9 +37,9 @@ export default class Controller {
     } catch (err) {
       return next(err);
     }
-  }
+  };
 
-  async patchOne(req, res, next) {
+  patchOne = async (req, res, next) => {
     try {
       const { id } = req.params;
       const data = await this.service.patchOne(id, req.body);
@@ -70,9 +51,9 @@ export default class Controller {
     } catch (err) {
       return next(err);
     }
-  }
+  };
 
-  async deleteOne(req, res, next) {
+  deleteOne = async (req, res, next) => {
     try {
       const { id } = req.params;
       await this.service.deleteOne(id);
@@ -83,5 +64,5 @@ export default class Controller {
     } catch (err) {
       return next(err);
     }
-  }
+  };
 }
