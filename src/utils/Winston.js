@@ -32,7 +32,6 @@ const options = {
       winston.format.colorize(),
       // Setting log format
       winston.format.printf((log) => {
-        console.log(log.message);
         if (log.stack) return `[${log.timestamp}] [${log.level}] ${log.stack}`;
         return `[${log.timestamp}] [${log.level}] ${log.message}`;
       })
@@ -49,7 +48,7 @@ const logger = winston.createLogger({
     // - Write to all logs with level `info` and below to `combined.log`
     // - Write all logs error (and below) to `error.log`.
     //
-    new winston.transports.File(options.file),
+    // new winston.transports.File(options.file),
     new winston.transports.Console(options.console),
   ],
   exitOnError: false,

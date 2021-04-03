@@ -4,7 +4,7 @@ import httpMessage from '../../constants/httpMessage';
 
 export default class Service {
   getMany() {
-    return this.repository.getAll();
+    return this.repository.getMany();
   }
 
   async getOne(id) {

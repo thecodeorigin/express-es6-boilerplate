@@ -3,6 +3,7 @@ import authentication from '../../../common/guards/authentication';
 import { routerGroup } from '../../../common/helpers/routerGroup';
 import UserController from './index.controller';
 
+const controller = UserController.getController();
 module.exports = routerGroup(
   {
     name: 'users',
@@ -12,41 +13,47 @@ module.exports = routerGroup(
     {
       method: 'get',
       path: '/',
-      handlers: [authentication, UserController.getController().getAll],
+      middlewares: [authentication],
+      validators: [],
+      controllers: [controller.getMany],
     },
     {
       method: 'get',
       path: '/:id',
-      handlers: [authentication, UserController.getController().getOne],
+      middlewares: [authentication],
+      validators: [],
+      controllers: [controller.getOne],
     },
     {
       method: 'post',
       path: '/',
-      handlers: [
-        authentication,
+      middlewares: [authentication],
+      validators: [
         ValidationHelper.isNotEmpty('email'),
         ValidationHelper.isEmail('email'),
         ValidationHelper.isNotEmpty('name'),
         ValidationHelper.isNotEmpty('password'),
-        UserController.getController().createOne,
       ],
+      controllers: [controller.createOne],
     },
     {
       method: 'patch',
       path: '/:id',
-      handlers: [
-        authentication,
+      middlewares: [authentication],
+      validators: [
         ValidationHelper.isNotEmpty('email', true),
         ValidationHelper.isEmail('email', true),
         ValidationHelper.isNotEmpty('name', true),
         ValidationHelper.isNotEmpty('password', true),
-        UserController.getController().patchOne,
       ],
+      controllers: [controller.patchOne],
     },
     {
       method: 'delete',
       path: '/:id',
-      handlers: [authentication, UserController.getController().deleteOne],
+      middlewares: [authentication],
+      validators: [],
+      controllers: [controller.deleteOne],
     },
   ]
 );

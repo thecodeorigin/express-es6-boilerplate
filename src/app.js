@@ -24,7 +24,11 @@ router.forEach((route) => {
       )}: ${chalk.blue(route.path)} configured and setup.`
     );
   }
-  app[route.method](`/v1${route.path}`, ...route.handlers);
+  app[route.method](`/v1${route.path}`, [
+    ...route.middlewares,
+    ...route.validators,
+    ...route.controllers,
+  ]);
 });
 
 // 404 error handler

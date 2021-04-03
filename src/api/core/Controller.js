@@ -1,5 +1,24 @@
 export default class Controller {
-  async getMany(req, res, next) {
+  constructor() {
+    this.bindMethods();
+  }
+
+  bindMethods() {
+    // Get methods
+    const proto = Object.getPrototypeOf(this);
+    const methods = [
+      ...Object.getOwnPropertyNames(Controller.prototype),
+      ...Object.getOwnPropertyNames(proto),
+    ];
+    // Bind methods
+    methods.forEach((method) => {
+      if (typeof this[method] === 'function') {
+        this[method] = this[method].bind(this);
+      }
+    });
+  }
+
+  async getMany(_req, res, next) {
     try {
       const data = await this.service.getMany();
       return res.status(200).json({
@@ -14,8 +33,8 @@ export default class Controller {
 
   async getOne(req, res, next) {
     try {
-      const payload = req.params.id;
-      const data = await this.service.getOne(payload);
+      const { id } = req.params;
+      const data = await this.service.getOne(id);
       return res.json({
         status: 'success',
         statusCode: 200,
@@ -28,12 +47,7 @@ export default class Controller {
 
   async createOne(req, res, next) {
     try {
-      const payload = {
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.name,
-      };
-      const data = await this.service.createOne(payload);
+      const data = await this.service.createOne(req.body);
       return res.status(201).json({
         status: 'success',
         statusCode: 201,
@@ -46,12 +60,8 @@ export default class Controller {
 
   async patchOne(req, res, next) {
     try {
-      const payload = {
-        email: req.body.email,
-        password: req.body.password,
-        name: req.body.name,
-      };
-      const data = await this.service.patchOne(payload);
+      const { id } = req.params;
+      const data = await this.service.patchOne(id, req.body);
       return res.status(201).json({
         status: 'success',
         statusCode: 201,
@@ -64,7 +74,8 @@ export default class Controller {
 
   async deleteOne(req, res, next) {
     try {
-      await this.service.deleteOne(req.params.id);
+      const { id } = req.params;
+      await this.service.deleteOne(id);
       return res.status(200).json({
         status: 'success',
         statusCode: 200,

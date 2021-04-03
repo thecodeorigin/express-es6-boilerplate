@@ -11,8 +11,6 @@ export default class AuthController extends Controller {
     this.service = AuthService.getService();
   }
 
-  static instance;
-
   static getController() {
     if (!AuthController.instance) {
       AuthController.instance = new AuthController();

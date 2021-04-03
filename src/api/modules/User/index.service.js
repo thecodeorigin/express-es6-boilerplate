@@ -1,12 +1,16 @@
 import Service from '../../core/Service';
+import UserRepository from './index.repository';
 
-export default class AuthService extends Service {
-  static instance;
+export default class UserService extends Service {
+  constructor() {
+    super();
+    this.repository = UserRepository.getRepository();
+  }
 
   static getService() {
-    if (!AuthService.instance) {
-      AuthService.instance = new AuthService();
+    if (!UserService.instance) {
+      UserService.instance = new UserService();
     }
-    return AuthService.instance;
+    return UserService.instance;
   }
 }

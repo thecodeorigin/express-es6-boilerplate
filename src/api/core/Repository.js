@@ -1,23 +1,27 @@
 import knex from '../../config/connection';
 
 export default class Repository {
+  constructor(tableName) {
+    this.tableName = tableName;
+  }
+
   getMany() {
-    return knex('users').select();
+    return knex(this.tableName).select();
   }
 
   async getOneById(id) {
-    return knex('users').where({ id }).first();
+    return knex(this.tableName).where({ id }).first();
   }
 
   async createOne(payload) {
-    return knex('users').insert(payload);
+    return knex(this.tableName).insert(payload);
   }
 
   async patchOne(id, payload) {
-    return knex('users').where({ id }).update(payload);
+    return knex(this.tableName).where({ id }).update(payload);
   }
 
   deleteOne(id) {
-    return knex('users').where({ id }).delete();
+    return knex(this.tableName).where({ id }).delete();
   }
 }

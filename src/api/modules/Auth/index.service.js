@@ -7,8 +7,6 @@ import Service from '../../core/Service';
 import UserRepository from '../User/index.repository';
 
 export default class AuthService extends Service {
-  static instance;
-
   constructor() {
     super();
     this.repository = UserRepository.getRepository();
@@ -45,7 +43,6 @@ export default class AuthService extends Service {
     const { email, name, password } = payload;
     const hash = await bcrypt.hash(password, 10);
     const user = await this.repository.getOneByEmail(email);
-    console.log(user);
     if (user) {
       throw new HTTPException(400, httpMessage.EMAIL_EXISTS);
     }

@@ -1,19 +1,17 @@
 import '../../../config/env';
 import Controller from '../../core/Controller';
-import AuthService from './index.service';
+import UserService from './index.service';
 
-export default class AuthController extends Controller {
+export default class UserController extends Controller {
   constructor() {
     super();
-    this.service = AuthService.getService();
+    this.service = UserService.getService();
   }
 
-  static instance;
-
   static getController() {
-    if (!AuthController.instance) {
-      AuthController.instance = new AuthController();
+    if (!UserController.instance) {
+      UserController.instance = new UserController();
     }
-    return AuthController.instance;
+    return UserController.instance;
   }
 }

@@ -2,6 +2,7 @@ import ValidationHelper from '../../../common/filters/validation';
 import { routerGroup } from '../../../common/helpers/routerGroup';
 import AuthController from './index.controller';
 
+const controller = AuthController.getController();
 export default routerGroup(
   {
     name: 'auth',
@@ -11,36 +12,32 @@ export default routerGroup(
     {
       method: 'post',
       path: '/register',
-      handlers: [
+      middlewares: [],
+      validators: [
         ValidationHelper.isNotEmpty('email'),
         ValidationHelper.isEmail('email'),
         ValidationHelper.isNotEmpty('name'),
         ValidationHelper.isNotEmpty('password'),
-        AuthController.getController().register.bind(
-          AuthController.getController()
-        ),
       ],
+      controllers: [controller.register],
     },
     {
       method: 'post',
       path: '/login',
-      handlers: [
+      middlewares: [],
+      validators: [
         ValidationHelper.isNotEmpty('email'),
         ValidationHelper.isEmail('email'),
         ValidationHelper.isNotEmpty('password'),
-        AuthController.getController().login.bind(
-          AuthController.getController()
-        ),
       ],
+      controllers: [controller.login],
     },
     {
       method: 'get',
       path: '/me',
-      handlers: [
-        AuthController.getController().getMe.bind(
-          AuthController.getController()
-        ),
-      ],
+      middlewares: [],
+      validators: [],
+      controllers: [controller.getMe],
     },
   ]
 );

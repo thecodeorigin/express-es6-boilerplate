@@ -2,7 +2,9 @@ import Repository from '../../core/Repository';
 import knex from '../../../config/connection';
 
 export default class UserRepository extends Repository {
-  static instance;
+  constructor() {
+    super('users');
+  }
 
   static getRepository() {
     if (!UserRepository.instance) {
