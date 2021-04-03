@@ -6,8 +6,8 @@
  * @param {Route} routes
  * @return {Array<Route>}
  */
-const routerGroup = (groupOptions, routes) =>
-  routes.map((route) => ({
+export default function routerGroup(groupOptions, routes) {
+  return routes.map((route) => ({
     ...route,
     method: route.method.toLowerCase(),
     // Paste absolute path
@@ -16,6 +16,4 @@ const routerGroup = (groupOptions, routes) =>
       .filter((path) => path !== '')
       .join('/')}`,
   }));
-module.exports = {
-  routerGroup,
-};
+}

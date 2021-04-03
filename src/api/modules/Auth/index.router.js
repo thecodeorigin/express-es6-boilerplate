@@ -1,8 +1,9 @@
 import ValidationHelper from '../../../common/filters/validation';
-import { routerGroup } from '../../../common/helpers/routerGroup';
+import routerGroup from '../../../common/helpers/routerGroup';
 import AuthController from './index.controller';
 
 const controller = AuthController.getController();
+
 export default routerGroup(
   {
     name: 'auth',

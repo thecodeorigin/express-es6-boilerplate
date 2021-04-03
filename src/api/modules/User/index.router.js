@@ -1,10 +1,10 @@
 import ValidationHelper from '../../../common/filters/validation';
 import authentication from '../../../common/guards/authentication';
-import { routerGroup } from '../../../common/helpers/routerGroup';
+import routerGroup from '../../../common/helpers/routerGroup';
 import UserController from './index.controller';
 
 const controller = UserController.getController();
-module.exports = routerGroup(
+export default routerGroup(
   {
     name: 'users',
     prefix: '/users',

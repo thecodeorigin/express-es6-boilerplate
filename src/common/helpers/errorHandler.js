@@ -1,4 +1,4 @@
-const { UNEXPECTED_EXCEPTION } = require('../../constants/httpMessage');
+import httpMessage from '../../constants/httpMessage';
 /**
  * @description This helper function is used to handle Exception inside ExpressJS application
  */
@@ -16,6 +16,6 @@ export default function handleError(err, res) {
   return res.status(500).json({
     status: 'error',
     statusCode: 500,
-    message: UNEXPECTED_EXCEPTION,
+    message: httpMessage.UNEXPECTED_EXCEPTION,
   });
 }
