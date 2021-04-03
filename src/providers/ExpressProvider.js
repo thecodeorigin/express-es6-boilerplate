@@ -1,4 +1,3 @@
-// import SwaggerPlugin from '../plugins/SwaggerPlugin';
 import chalk from 'chalk';
 import expressWinston from 'express-winston';
 import Express from 'express';
@@ -22,7 +21,8 @@ export default class ExpressProvider {
     this.app.use(
       expressWinston.logger({
         winstonInstance: logger,
-        msg: '{{req.method}} {{req.url}} {{res.statusCode}} - {{res.responseTime}}ms',
+        msg:
+          '{{req.method}} {{req.url}} {{res.statusCode}} - {{res.responseTime}}ms',
       })
     );
   }
