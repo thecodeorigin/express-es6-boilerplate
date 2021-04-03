@@ -1,6 +1,5 @@
 // ExpressJS dependencies
 import express from 'express';
-import path from 'path';
 import cookieParser from 'cookie-parser';
 import chalk from 'chalk';
 import logger from './utils/Winston';
@@ -15,7 +14,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 // Router configuration
 router.forEach((route) => {
   if (app.get('env') !== 'test') {

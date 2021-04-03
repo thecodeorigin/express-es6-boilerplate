@@ -7,7 +7,7 @@ const currentMonth = new Date().toLocaleString('default', { month: 'long' });
 const date = moment().format('DDMMYYYY-hhmmss');
 const options = {
   file: {
-    level: 'debug',
+    level: 'info',
     format: winston.format.simple(),
     filename: path.join(
       __dirname,
@@ -15,7 +15,7 @@ const options = {
     ),
     handleExceptions: true,
     maxsize: 5242880, // 5MB
-    json: true,
+    json: false,
     colorize: false,
   },
   console: {
@@ -41,18 +41,16 @@ const options = {
 };
 
 const logger = winston.createLogger({
-  level: 'info',
   format: winston.format.json(),
   transports: [
     //
     // - Write to all logs with level `info` and below to `combined.log`
     // - Write all logs error (and below) to `error.log`.
     //
-    // new winston.transports.File(options.file),
+    new winston.transports.File(options.file),
     new winston.transports.Console(options.console),
   ],
   exitOnError: false,
   silent: false,
 });
-
 export default logger;

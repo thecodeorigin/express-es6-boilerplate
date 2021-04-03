@@ -6,21 +6,21 @@ export default function banner() {
   const route = () =>
     `http://${process.env.APP_HOST || 'localhost'}:${process.env.APP_PORT}`;
   if (['development', 'staging'].includes(process.env.NODE_ENV.trim())) {
-    logger.info('');
-    logger.info(
+    logger.debug('');
+    logger.debug(
       `Your API is ready on ${route()}${process.env.APP_ROUTE_PREFIX}`
     );
-    logger.info('To shut it down, press <CTRL> + C at any time.');
-    logger.info('');
-    logger.info('-------------------------------------------------------');
-    logger.info(`Project name : ${pkj.name}`);
-    logger.info(`Environment  : ${process.env.NODE_ENV || 'development'}`);
-    logger.info(`Version      : ${pkj.version}`);
-    logger.info('');
-    logger.info(`API Info     : ${route()}${process.env.APP_ROUTE_PREFIX}`);
-    logger.info(`Swagger      : ${route()}${process.env.SWAGGER_ROUTE}`);
-    logger.info('-------------------------------------------------------');
-    logger.info('');
+    logger.debug('To shut it down, press <CTRL> + C at any time.');
+    logger.debug('');
+    logger.debug('-------------------------------------------------------');
+    logger.debug(`Project name : ${pkj.name}`);
+    logger.debug(`Environment  : ${process.env.NODE_ENV || 'development'}`);
+    logger.debug(`Version      : ${pkj.version}`);
+    logger.debug('');
+    logger.debug(`API Info     : ${route()}${process.env.APP_ROUTE_PREFIX}`);
+    logger.debug(`Swagger      : ${route()}${process.env.SWAGGER_ROUTE}`);
+    logger.debug('-------------------------------------------------------');
+    logger.debug('');
   }
   if (process.env.NODE_ENV === 'production') {
     logger.info(`> Server is running at: ${route()}`);

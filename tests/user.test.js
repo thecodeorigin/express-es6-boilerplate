@@ -1,6 +1,6 @@
 import request from 'supertest';
-import server from '../src/server';
 import knex from '../src/config/connection';
+import ExpressProvider from '../src/providers/ExpressProvider';
 
 describe('/users endpoint', () => {
   test('GET /users should return 401 if user is not logged in', async (done) => {
