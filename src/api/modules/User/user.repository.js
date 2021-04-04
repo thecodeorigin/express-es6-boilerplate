@@ -1,3 +1,4 @@
+import { User } from "../../../models";
 import BaseRepository from "../../core/base.repository"
 
 export default class UserRepository extends BaseRepository {

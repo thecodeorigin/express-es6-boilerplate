@@ -1,2 +1,2 @@
-const routes = []
-export default routes;
+import { userRoute } from "./modules/User/user.router";
+export default [...userRoute];

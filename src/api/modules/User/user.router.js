@@ -1,6 +1,8 @@
-import { routerGroup } from "../../../utils";
+import { routerGroup } from "../../../common/core";
+import UserController from "./user.controller";
+const userController = new UserController()
 
-export default routerGroup(
+export const userRoute = routerGroup(
   {
     name: 'users',
     prefix: '/users',
@@ -10,6 +12,6 @@ export default routerGroup(
     path: '/',
     validator: null,
     middlewares: [],
-    controller: null,
+    controller: userController.callMethod('getMany'),
   },
 )

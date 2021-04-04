@@ -8,28 +8,21 @@ import _ from "lodash";
  * @param {Route} routes
  * @return {Array<Route>}
  */
-export const routerGroup = (groupOptions, routes) =>
+export const routerGroup = (groupOptions, ...routes) => 
   routes.map((route) => {
+    validateRouteConfig(route)
     const method = route.method.toLowerCase();
     const path = `/${[groupOptions.prefix, route.path]
       .map((path) => path.replace(/(^\/|\/$)/g, ""))
       .filter((path) => path !== "")
       .join("/")}`;
-    const validator = route.validator || null;
-    const middlewares = route.middlewares || [];
-    validateRouteConfig(route)
-    if (!route.controller) {
-      throw Error(
-        `No controller for route ${route.method.toLowerCase()} in path ${path}`
-      );
-    }
+    route = _.omit(route, ['method', 'path'])
     return {
       method,
       path,
-      handlers: _.compact([validator, ...middlewares, route.controller]),
+      handlers: _.compact(_.flattenDeep(Object.values(route))),
     };
   });
-
 
 const validateRouteConfig = (routeConfig) => {
   if (!routeConfig.path || !routeConfig.method) {
@@ -37,7 +30,7 @@ const validateRouteConfig = (routeConfig) => {
   }
   if (!routeConfig.controller) {
     throw new Error(
-      `No controller for route ${route.method.toLowerCase()} in path ${route.path}`
+      `No controller for route ${routeConfig.method.toLowerCase()} in path ${routeConfig.path}`
     );
   }
 }

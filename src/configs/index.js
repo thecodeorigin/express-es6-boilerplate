@@ -2,21 +2,21 @@ import _get from 'lodash/get';
 
 // Read Configurations
 const environmentType = process.env.NODE_ENV || 'development'
-const configs = require(`./${environmentType}.config`)
+const configs = require(`./${environmentType}.config`).default
 
 const getServerConfigs = () => {
-  return _get(configs, 'server');
+  return _get(configs, 'server', {});
 };
 
 const getBcryptConfigs = () => {
-  return _get(configs, 'bcrypt');
+  return _get(configs, 'bcrypt', {});
 };
 
 const getDatabaseConfigs = () => {
-    return _get(configs, 'database');
+    return _get(configs, 'database', {});
 }
 
-export default {
+export {
   getServerConfigs,
   getBcryptConfigs,
   getDatabaseConfigs

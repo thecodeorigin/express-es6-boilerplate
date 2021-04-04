@@ -1,9 +1,9 @@
 import HTTPException from '../../errors';
 
 export default class BaseService {
-  static repository = null;
-  getMany() {
-    return this.repository.getMany();
+  repository = null;
+  getMany(query) {
+    return this.repository.find();
   }
 
   async getOne(id) {
